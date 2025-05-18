@@ -1,20 +1,29 @@
 {
     "compilerOptions": {
+        "strict": true,
         "module": "commonjs",
         "esModuleInterop": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
-        "target": "es6",
+        "target": "ES2022",
         "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
+        "strictPropertyInitialization": false,
+        "removeComments": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "strictNullChecks": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "forceConsistentCasingInFileNames": true,
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["node_modules/*"]
         }
-
     },
-    "include": [
-        "./**/*"
-    ]
+    "include": ["./src", "index.ts"]
 }

@@ -1,32 +1,30 @@
 import express from 'express';
 import cors from 'cors';
 import session from "express-session";
-import { serverConfiguration } from '../node.config';
-import { API_Logger } from './middleware/APILogger';
-import Router from './routes';
-import ExpressRouter from './routes';
+import server_configurations from './configs/init';
 
-const App = express();
-App.use(cors())
-
-
-App.use(
+const app = express();
+app.use(cors(
+    {
+        origin: '*'
+    }
+))
+app.use(
     session({
-        secret: serverConfiguration.secretKey,
+        secret: server_configurations.secretKey,
         resave: false,
-        saveUninitialized: true
+        saveUninitialized: true,
     })
 );
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb' }));
+app.use(express.static('Public'))
+app.set("view engine", "ejs");
 
+async function startServer() {
+    app.listen(server_configurations.serverPort, server_configurations.serverHost, () => {
+        console.log(`Server listening at http://${server_configurations.serverHost}:${server_configurations.serverPort}`);
+    });
+}
 
-
-App.use(express.json({ limit: '50mb' }));
-App.use(express.urlencoded({ limit: '50mb' }));
-
-App.use(API_Logger, ExpressRouter)
-App.use(express.static('Public'))
-
-App.set("view engine", "ejs");
-
-
-export default App
+export default startServer

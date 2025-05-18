@@ -1,13 +1,10 @@
-import * as dotenv from 'dotenv';
-dotenv.config({ path: __dirname + '/.env' })
+import * as dotenv from 'dotenv'
+dotenv.config({
+    path:
+        __dirname +
+        "/.env." +
+        (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase()),
+})
+console.log(__dirname +"/.env." +(process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase()));    
 
-const serverConfiguration = {
-    serverPort: parseInt(process.env.PORT || "9000") || 9000,
-    serverHost: process.env.HOST || '127.0.0.1',
-    secretKey: process.env.SECRET_KEY || "Shivkumar Chauhan",
-    databaseUrl: process.env.DATABASE_URL || ""
-}
-
-export {
-    serverConfiguration,
-}
+export default process.env

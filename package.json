@@ -1,33 +1,57 @@
 {
-  "dependencies": {
-    "@apollo/server": "^4.11.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "ejs": "^3.1.10",
-    "express": "^4.21.2",
-    "express-session": "^1.18.1",
-    "graphql": "^16.10.0",
-    "graphql-ws": "^5.16.0",
-    "jsonwebtoken": "^9.0.2",
-    "socket.io": "^4.8.1",
-    "ws": "^8.18.0"
-  },
-  "name": "node-graphql-backend",
-  "version": "1.0.0",
-  "main": "index.ts",
-  "scripts": {
-    "local": "nodemon index.ts",
-    "start": "node dist/index.js",
-    "build": "npx tsc",
-    "gcp-build": "npx tsc"
-  },
-  "author": "Shivkumar Chauhan",
-  "license": "MIT",
-  "description": "",
-  "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express-session": "^1.18.1",
-    "@types/node": "^22.10.2",
-    "typescript": "^5.7.2"
-  }
+    "name": "express-backend-starter",
+    "version": "1.0.0",
+    "description": "",
+    "license": "ISC",
+    "author": "Shivkumar Chauhan",
+    "type": "commonjs",
+    "main": "index.ts",
+    "scripts": {
+        "local": "nodemon index.ts",
+        "lint": "eslint .",
+        "format-code": "npx prettier --write .",
+        "build": "npx tsc",
+        "start": "export NODE_ENV=production && node dist/index.js",
+        "gcp-build": "npx tsc",
+        "git-pre-commit": "eslint . &&npx prettier --write . && npm run build && git add . ",
+        "git-commit": "npm run git-pre-commit && git commit -m deployment && git push origin master",
+        "deploy": "npm run git-commit && git checkout -b production && git merge master && git push origin production && git checkout master",
+        "build-webpack": "webpack --config webpack.config.js",
+        "run-webpack": "node pkg/bundle.js"
+    },
+    "keywords": [
+        "nodejs",
+        "express-js",
+        "backend",
+        "shivkumar chauhan"
+    ],
+    "dependencies": {
+        "bcryptjs": "^3.0.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.5.0",
+        "ejs": "^3.1.10",
+        "eslint": "^9.27.0",
+        "express": "^5.1.0",
+        "express-session": "^1.18.1",
+        "generate-api-key": "^1.0.2",
+        "geoip-lite": "^1.4.10",
+        "jsonwebtoken": "^9.0.2",
+        "jwt-decode": "^4.0.0",
+        "mongoose": "^8.15.0",
+        "prettier": "^3.5.3",
+        "typescript-eslint": "^8.32.1",
+        "uuid": "^11.1.0"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "^3.0.0",
+        "@types/cors": "^2.8.18",
+        "@types/express": "^5.0.2",
+        "@types/express-session": "^1.18.1",
+        "@types/geoip-lite": "^1.4.4",
+        "@types/jsonwebtoken": "^9.0.9",
+        "@types/node": "^22.15.18",
+        "typescript": "^5.8.3",
+        "webpack": "^5.99.8",
+        "webpack-cli": "^6.0.1"
+    }
 }
